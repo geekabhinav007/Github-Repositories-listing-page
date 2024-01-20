@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return Math.ceil(totalItems / perPage);
         }
 
-        return 10; // Default to 1 page if no information is available
+        return 10; // Default to 10 page if no information is available
     }
 
     // Populate repository list with technologies
@@ -144,8 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to fetch and display additional technologies when "Load More" is clicked
     function fetchAndDisplayMoreLanguages(languagesUrl, technologiesListContainer) {
-        // You can implement additional fetch logic to load more items
-        // For simplicity, this example just fetches all items again
         fetch(languagesUrl)
             .then(response => response.json())
             .then(languages => {
