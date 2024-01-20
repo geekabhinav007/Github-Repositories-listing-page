@@ -2,12 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const username = 'geekabhinav007';
     const defaultPage = 1;
     const defaultPerPage = 10;
-    const accessToken = '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';
-
-    // Declare headers at the beginning
-    const headers = {
-        Authorization: `Bearer ${accessToken}`
-    };
 
     // Initial load
     fetchProfile(username);
@@ -15,41 +9,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Fetch user profile information
     function fetchProfile(username) {
-        fetch(`https://api.github.com/users/${username}`, { headers })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.status}`);
-                }
-                return response.json();
-            })
+        fetch(`https://api.github.com/users/${username}`)
+            .then(response => response.json())
             .then(profileData => updateProfileUI(profileData))
             .catch(error => console.error('Error fetching profile data:', error));
     }
 
-// Update UI with user profile information
-function updateProfileUI(profileData) {
-    document.title = profileData.name || 'GitHub Repositories';
+    // Update UI with user profile information
+    function updateProfileUI(profileData) {
+        document.title = profileData.name || 'GitHub Repositories';
 
-    const header = document.querySelector('header');
-    header.innerHTML += `
-    <div style=" align-items: center; font-weight: 700; margin-right: 5vh;margin-left:5vh;">
-        <img src="${profileData.avatar_url}" alt="Profile Picture" style="width: 250px; height: 250px; border-radius: 50%; margin-right: 20px;">
-        <div style="text-align: left;margin-left:5vh;">
-            <p style="font-size: 24px; font-weight: bold; margin-bottom: 5px; ">${profileData.name || 'Not provided'}</p>
-            <p style="font-size: 18px; color: #555;">${profileData.login}</p>
-            <p style="font-size: 16px; margin-top: 5px;">${profileData.bio || 'No bio available'}</p>
-            <p style="font-size: 16px; color: #777; margin-top: 5px;">${profileData.location || 'Not provided'}</p>
+        const header = document.querySelector('header');
+        header.innerHTML += `
+        <div style=" align-items: center; font-weight: 700; margin-right: 5vh;margin-left:5vh;">
+            <img src="${profileData.avatar_url}" alt="Profile Picture" style="width: 250px; height: 250px; border-radius: 50%; margin-right: 20px;">
+            <div style="text-align: left;margin-left:5vh;">
+                <p style="font-size: 24px; font-weight: bold; margin-bottom: 5px; ">${profileData.name || 'Not provided'}</p>
+                <p style="font-size: 18px; color: #555;">${profileData.login}</p>
+                <p style="font-size: 16px; margin-top: 5px;">${profileData.bio || 'No bio available'}</p>
+                <p style="font-size: 16px; color: #777; margin-top: 5px;">${profileData.location || 'Not provided'}</p>
+            </div>
         </div>
-    </div>
-`;
-}
+    `;
+    }
+
+
+
+
     function fetchRepositories(username, page, perPage) {
         toggleLoader(true);
 
         const apiUrl = `https://api.github.com/users/${username}/repos?page=${page}&per_page=${perPage}`;
 
-        // Pass the headers in the options object
-        fetch(apiUrl, { headers })
+        fetch(apiUrl)
             .then(response => {
                 // Check for the Link header
                 const linkHeader = response.headers.get('Link');
@@ -71,7 +63,6 @@ function updateProfileUI(profileData) {
             });
     }
 
-   
 
     // Helper function to extract total pages from Link header or calculate based on total items
     function extractTotalPages(linkHeader, totalItems, perPage) {
@@ -87,7 +78,7 @@ function updateProfileUI(profileData) {
             return Math.ceil(totalItems / perPage);
         }
 
-        return 6;
+        return 10; // Default to 1 page if no information is available
     }
 
     // Populate repository list with technologies
