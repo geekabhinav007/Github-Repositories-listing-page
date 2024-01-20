@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repositories</title>
+    <!-- Include Bootstrap CSS (optional) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f5f1f1;
+        }
+
+        header {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #repository-list {
+            margin: 20px;
+        }
+
+        .repository-item {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color:#efeaea ;
+        }
+
+        #pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #loader {
+            display: none;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .pagination-flex-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            /* Adjust the gap as needed */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1></h1>
+    </header>
+
+    <!-- Repository List Section -->
+    <section id="repository-list">
+        <!-- Repositories will be dynamically populated here -->
+    </section>
+
+    <!-- Pagination Section -->
+    <section id="pagination">
+        <!-- Pagination controls go here -->
+    </section>
+
+    <!-- Optional: Loader -->
+    <div id="loader">Loading...</div>
+
+    <!-- Include Bootstrap JS (optional) and your custom JS file -->
+    <!-- Include your custom JS file -->
+    <script src="app.js"></script>
+</body>
+
+</html>
